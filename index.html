@@ -12,25 +12,25 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+       
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             overflow-x: hidden;
         }
-        
+       
         .gradient-text {
             background: linear-gradient(135deg, #0ea5e9, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+       
         .glass {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
+       
         .btn-primary {
             background: linear-gradient(135deg, #0ea5e9, #06b6d4);
             color: white;
@@ -44,12 +44,12 @@
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
         }
-        
+       
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(14, 165, 233, 0.4);
         }
-        
+       
         .btn-secondary {
             background: white;
             color: #0ea5e9;
@@ -63,11 +63,11 @@
             border: 2px solid #0ea5e9;
             transition: all 0.3s;
         }
-        
+       
         .btn-secondary:hover {
             background: #f0f9ff;
         }
-        
+       
         .feature-card {
             background: white;
             padding: 2rem;
@@ -76,36 +76,58 @@
             transition: all 0.3s;
             border: 1px solid #f0f0f0;
         }
-        
+       
         .feature-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.12);
         }
-        
+       
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
             line-height: 1;
         }
-        
+       
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-        
+       
         .float {
             animation: float 6s ease-in-out infinite;
         }
-        
+       
         .nav-link {
             color: #64748b;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+       
         .nav-link:hover {
             color: #0ea5e9;
+        }
+
+        /* ========== VIDEO CONTAINER STYLES ========== */
+        /* Maintains 16:9 aspect ratio for responsive video */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            background-color: #000;
+        }
+
+        /* Video fills container absolutely while maintaining aspect ratio */
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -123,14 +145,14 @@
                         <div class="text-xs text-gray-500">Clinical Intelligence Platform</div>
                     </div>
                 </div>
-                
+               
                 <div class="hidden md:flex gap-8">
                     <a href="#solution" class="nav-link">Solution</a>
                     <a href="#technology" class="nav-link">Technology</a>
                     <a href="#impact" class="nav-link">Impact</a>
                     <a href="#partners" class="nav-link">Partners</a>
                 </div>
-                
+               
                 <div class="flex gap-3">
                     <button onclick="openQuickContactModal()" class="btn-secondary" style="padding: 0.75rem 1.5rem;">
                         <i class="ph ph-whatsapp-logo"></i>
@@ -152,17 +174,17 @@
                     <div class="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
                         <i class="ph-fill ph-rocket"></i> Pilot Program: January 2026 - Kwale County
                     </div>
-                    
+                   
                     <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                         Turn Any Phone Into a
-                        <span class="gradient-text">Smart Diagnostic Lab</span>
+                        <span class="gradient-text">Smart Triage and Diagnostic Lab</span>
                     </h1>
-                    
+                   
                     <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                        AI-powered rapid diagnostic testing for rural clinics. No internet required. 
+                        AI-powered rapid diagnostic testing for rural clinics. No internet required.
                         No specialist needed. Results in 2 minutes.
                     </p>
-                    
+                   
                     <div class="flex flex-wrap gap-4 mb-8">
                         <a href="#pilot" class="btn-primary">
                             <i class="ph ph-calendar-check"></i>
@@ -173,7 +195,7 @@
                             Watch Demo
                         </a>
                     </div>
-                    
+                   
                     <div class="flex items-center gap-6 text-sm text-gray-500">
                         <div class="flex items-center gap-2">
                             <i class="ph-fill ph-check-circle text-green-500"></i>
@@ -189,16 +211,39 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="relative">
+               
+                <!-- ========== VIDEO HERO SECTION START ========== -->
+                <!-- This section replaces the old placeholder with an actual video card -->
+                <div class="relative" id="how-it-works">
                     <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100 float">
-                        <div class="aspect-video bg-gradient-to-br from-blue-100 to-cyan-100 rounded-xl mb-4 flex items-center justify-center">
-                            <div class="text-center">
-                                <i class="ph ph-camera text-6xl text-blue-500 mb-4"></i>
-                                <p class="text-gray-600 font-semibold">Phone + RDT Strip + AI</p>
-                                <p class="text-gray-400 text-sm mt-2">95% accuracy validated by CDC</p>
-                            </div>
+                       
+                        <!-- ========== VIDEO CONTAINER ========== -->
+                        <!-- STEP 1: This wrapper maintains aspect ratio (16:9) for all screen sizes -->
+                        <!-- STEP 2: padding-bottom: 56.25% ensures 16:9 ratio without distortion -->
+                        <!-- STEP 3: Replace "your-video.mp4" below with your actual video URL -->
+                        <div class="video-container mb-4">
+                            <!-- ========== VIDEO ELEMENT ========== -->
+                            <!-- KEY ATTRIBUTES EXPLAINED:
+                                 - autoplay: Automatically starts playing when page loads
+                                 - loop: Video restarts when it ends (continuous playback)
+                                 - muted: REQUIRED for autoplay to work (browser autoplay policy)
+                                 - playsinline: Allows autoplay on mobile/iOS devices
+                                 - controls: Shows play, pause, volume, and fullscreen buttons
+                                 - poster="image-url.jpg": (Optional) Shows thumbnail before video plays
+                                 
+                                 BROWSER SUPPORT: Modern browsers (Chrome, Firefox, Safari, Edge)
+                                 FORMATS SUPPORTED: MP4 (.mp4), WebM (.webm), Ogg (.ogv)
+                            -->
+                            <video autoplay loop muted playsinline controls poster="">
+                                <!-- CHANGE THIS: Replace with your video URL -->
+                                <!-- Example: https://example.com/demo-video.mp4 -->
+                                <source src="videos/video3.mp4" type="video/mp4">
+                                <!-- Fallback message for browsers that don't support HTML5 video -->
+                                Your browser does not support the video tag. Please use a modern browser.
+                            </video>
                         </div>
+                       
+                        <!-- Stats below video (unchanged) -->
                         <div class="grid grid-cols-3 gap-3">
                             <div class="bg-gray-50 p-3 rounded-lg text-center">
                                 <div class="text-2xl font-bold text-blue-600">2min</div>
@@ -215,6 +260,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- ========== VIDEO HERO SECTION END ========== -->
             </div>
         </div>
     </section>
@@ -256,7 +302,7 @@
                     70% of Kenya's clinics are in rural areas with limited access to labs, specialists, and reliable diagnostics.
                 </p>
             </div>
-            
+           
             <div class="grid md:grid-cols-3 gap-8 mb-12">
                 <div class="feature-card">
                     <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center text-red-600 text-2xl mb-4">
@@ -267,7 +313,7 @@
                         Patients travel hours to urban labs, then wait days for results. Many never return.
                     </p>
                 </div>
-                
+               
                 <div class="feature-card">
                     <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 text-2xl mb-4">
                         <i class="ph-fill ph-money"></i>
@@ -277,7 +323,7 @@
                         KSh 500-2,000 per test + transport. Unaffordable for most rural families.
                     </p>
                 </div>
-                
+               
                 <div class="feature-card">
                     <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center text-yellow-600 text-2xl mb-4">
                         <i class="ph-fill ph-warning-diamond"></i>
@@ -297,10 +343,10 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4">Our Solution: Phone + Test Kit + AI</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    We integrate off-the-shelf hardware with proprietary AI to deliver lab-quality diagnostics at the point of care.
+                    We integrate off-the-shelf hardware with proprietary AI to deliver Triage and lab-quality diagnostics at the point of care.
                 </p>
             </div>
-            
+           
             <div class="grid md:grid-cols-2 gap-12 mb-16">
                 <div>
                     <h3 class="text-2xl font-bold mb-6">Hardware Partners</h3>
@@ -314,7 +360,7 @@
                                 <div class="text-sm text-gray-600">FDA-cleared rapid diagnostic test. $5-10 per kit. 95% accuracy.</div>
                             </div>
                         </div>
-                        
+                       
                         <div class="flex items-start gap-4 p-4 bg-green-50 rounded-xl">
                             <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
                                 <i class="ph-fill ph-drop text-green-600 text-xl"></i>
@@ -324,7 +370,7 @@
                                 <div class="text-sm text-gray-600">Oral swab test. $2-5 per kit. WHO prequalified.</div>
                             </div>
                         </div>
-                        
+                       
                         <div class="flex items-start gap-4 p-4 bg-purple-50 rounded-xl">
                             <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
                                 <i class="ph-fill ph-heart text-purple-600 text-xl"></i>
@@ -336,7 +382,7 @@
                         </div>
                     </div>
                 </div>
-                
+               
                 <div>
                     <h3 class="text-2xl font-bold mb-6">AI-Powered Analysis</h3>
                     <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl">
@@ -350,7 +396,7 @@
                                     <div class="text-sm text-gray-600">Android phone camera with alignment guides</div>
                                 </div>
                             </div>
-                            
+                           
                             <div class="flex items-center gap-4">
                                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold flex-shrink-0">
                                     2
@@ -360,7 +406,7 @@
                                     <div class="text-sm text-gray-600">Computer vision + trained model processes image locally</div>
                                 </div>
                             </div>
-                            
+                           
                             <div class="flex items-center gap-4">
                                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold flex-shrink-0">
                                     3
@@ -370,7 +416,7 @@
                                     <div class="text-sm text-gray-600">Diagnosis + confidence score + treatment recommendation</div>
                                 </div>
                             </div>
-                            
+                           
                             <div class="flex items-center gap-4">
                                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold flex-shrink-0">
                                     4
@@ -394,7 +440,7 @@
             <p class="text-xl opacity-90 mb-16 max-w-3xl mx-auto">
                 Real outcomes from similar programs across sub-Saharan Africa
             </p>
-            
+           
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
                     <div class="text-5xl font-bold mb-2">50%</div>
@@ -425,7 +471,7 @@
                     We're in pilot stage. Here's our validation roadmap.
                 </p>
             </div>
-            
+           
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="feature-card">
                     <div class="flex items-center gap-3 mb-4">
@@ -441,7 +487,7 @@
                         <li>✓ Roche Accu-Chek connectivity</li>
                     </ul>
                 </div>
-                
+               
                 <div class="feature-card border-2 border-orange-200">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
@@ -456,7 +502,7 @@
                         <li>→ Clinical validation at KNH</li>
                     </ul>
                 </div>
-                
+               
                 <div class="feature-card">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600">
@@ -466,7 +512,7 @@
                     </div>
                     <h3 class="font-bold mb-2">Pilot Launch</h3>
                     <ul class="text-sm text-gray-600 space-y-2">
-                        <li>→ 10 clinics in Kenya</li>
+                        <li>→ 10 clinics in Kenyalink</li>
                         <li>→ 1,000 tests in first 3 months</li>
                         <li>→ Published accuracy study</li>
                     </ul>
@@ -482,7 +528,7 @@
                 <h2 class="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
                 <p class="text-xl text-gray-600">No hidden fees. Cancel anytime. Start with 90-day free trial.</p>
             </div>
-            
+           
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-100">
                     <div class="text-sm font-semibold text-gray-500 mb-2">BASIC</div>
@@ -508,7 +554,7 @@
                     </ul>
                     <a href="#pilot" class="btn-secondary w-full justify-center">Start Free Trial</a>
                 </div>
-                
+               
                 <div class="bg-gradient-to-br from-blue-600 to-cyan-500 p-8 rounded-2xl shadow-2xl text-white transform scale-105">
                     <div class="text-sm font-semibold mb-2">PRO (Most Popular)</div>
                     <div class="text-4xl font-bold mb-1">KSh 15,000</div>
@@ -537,7 +583,7 @@
                     </ul>
                     <a href="#pilot" class="bg-white text-blue-600 hover:bg-blue-50 inline-flex items-center justify-center w-full px-6 py-3 rounded-xl font-semibold transition">Start Free Trial</a>
                 </div>
-                
+               
                 <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-gray-100">
                     <div class="text-sm font-semibold text-gray-500 mb-2">ENTERPRISE</div>
                     <div class="text-4xl font-bold mb-1">Custom</div>
@@ -575,7 +621,7 @@
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Join Our Pilot Program?</h2>
             <p class="text-xl opacity-90 mb-8">
-                Limited spots available for January 2026 launch. 
+                Limited spots available for January 2026 launch.
                 Get 90 days free + full training + hardware bundle.
             </p>
             <div class="flex flex-wrap gap-4 justify-center">
@@ -611,14 +657,14 @@
                         </div>
                     </div>
                     <p class="text-sm mb-6 leading-relaxed">
-                        Transforming rural healthcare in Kenya with AI-powered rapid diagnostics. 
+                        Transforming rural healthcare in Kenya with AI-powered rapid diagnostics.
                         Making world-class medical testing accessible to every community.
                     </p>
                     <div class="flex gap-3">
-                        <a href="https://www.linkedin.com/company/ameriafriai" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition">
+                        <a href="https://www.linkedin.com/company/110132609/admin/page-posts/published/" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition">
                             <i class="ph-fill ph-linkedin-logo text-xl"></i>
                         </a>
-                        <a href="https://twitter.com/ameriafriai" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-blue-400 rounded-lg flex items-center justify-center transition">
+                        <a href="https://x.com/ameriafriai" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-blue-400 rounded-lg flex items-center justify-center transition">
                             <i class="ph-fill ph-twitter-logo text-xl"></i>
                         </a>
                         <a href="https://wa.me/254703293000" target="_blank" class="w-10 h-10 bg-gray-800 hover:bg-green-500 rounded-lg flex items-center justify-center transition">
@@ -1018,15 +1064,15 @@
         // Handle demo form submission
         async function handleDemoSubmit(event) {
             event.preventDefault();
-            
+           
             const form = event.target;
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
-            
+           
             // Show loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Submitting...';
-            
+           
             // Collect form data
             const formData = new FormData(form);
             const data = {
@@ -1042,24 +1088,24 @@
                 consent: formData.get('consent'),
                 timestamp: new Date().toISOString()
             };
-            
+           
             // Simulate API call (replace with actual API endpoint)
             setTimeout(() => {
                 console.log('Demo request submitted:', data);
-                
+               
                 // Show success message
                 form.classList.add('hidden');
                 document.getElementById('form-success').classList.remove('hidden');
-                
+               
                 // Optional: Send to WhatsApp
                 const whatsappMessage = `New Demo Request:%0A%0AName: ${data.firstName} ${data.lastName}%0AEmail: ${data.email}%0APhone: ${data.phone}%0AClinic: ${data.clinicName}%0ALocation: ${data.location}`;
                 // Uncomment to enable auto-WhatsApp notification:
                 // window.open(`https://wa.me/254703293000?text=${whatsappMessage}`, '_blank');
-                
+               
                 // Reset button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
-                
+               
                 // Optional: Send email notification via third-party service
                 // Example: EmailJS, SendGrid, etc.
             }, 1500);
@@ -1089,16 +1135,16 @@
         // Sticky navigation
         let lastScroll = 0;
         const nav = document.querySelector('nav');
-        
+       
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
+           
             if (currentScroll > 100) {
                 nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
             } else {
                 nav.style.boxShadow = 'none';
             }
-            
+           
             lastScroll = currentScroll;
         });
 
@@ -1125,39 +1171,38 @@
             observer.observe(card);
         });
     </script>
-    
+   
     <style>
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        
+       
         .animate-spin {
             animation: spin 1s linear infinite;
         }
-        
+       
         /* Smooth transitions */
         * {
             scroll-behavior: smooth;
         }
-        
+       
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
-        
+       
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        
+       
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #0ea5e9, #06b6d4);
             border-radius: 5px;
         }
-        
+       
         ::-webkit-scrollbar-thumb:hover {
             background: #0284c7;
         }
-    </style>
 </body>
 </html>
